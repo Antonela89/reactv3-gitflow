@@ -3,6 +3,7 @@ const Api2 = () => {
         <div>
             <h1>toma pa vo´...</h1>
             <h1>Que lindo es copiar!!</h1>
+            <h1>;D</h1>
         </div>
     )
 }
