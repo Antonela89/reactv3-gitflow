@@ -1,11 +1,12 @@
 import './App.css';
-import Api from './componentes/Api.jsx'
-import componenteYas from './componentes/componenteYas.jsx'
+import Api from './componentes/Api.jsx';
+import ComponenteYas from './componentes/ComponenteYas.jsx';
 
 function App() {
   return (
     <div className="App">
-      <Api/>      
+      <Api/>
+      <ComponenteYas/> 
     </div>
   );
 }

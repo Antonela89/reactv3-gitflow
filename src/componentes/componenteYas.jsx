@@ -1,5 +1,5 @@
 
-const Yas = () => {
+const ComponenteYas = () => {
     return (
         <div>
             <h1>Ponele que soy un componente...</h1>
@@ -8,4 +8,4 @@ const Yas = () => {
     )
 }
 
-export default Yas
+export default ComponenteYas
