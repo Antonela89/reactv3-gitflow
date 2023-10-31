@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useAuth} from "../context/authContext";
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { Alert } from "./Alert";
 
 export function Inicio() {
@@ -8,7 +8,7 @@ export function Inicio() {
         email:"",
         password:"",
    });
-    const {login, loginWithGoogle} = useAuth()
+    const {login, loginWithGoogle, resetPassword} = useAuth()
     const navigate = useNavigate()
     const [error, setError] = useState();
 
@@ -34,10 +34,8 @@ export function Inicio() {
         if (error.code === "auth/wrong-password") {
             setError("Contraseña Incorrecta");
         } 
-       
-
-    }
-};
+        }
+    };
 
     const handleGoogleSignin = async () => {
         try {
@@ -48,35 +46,61 @@ export function Inicio() {
             console.log(error);
             setError(error);
         }
+    }
 
+    const handleResetPassword = async () => {
+        if(!user.email) return setError("Ingresa tu E-mail");
+        try {
+            await  resetPassword(user.email);
+            setError("Te hemos enviado un mail para restaurar tu contraseña")
+        }
+        catch (error){
+            setError(error.message);
+        }
     }
     
   return (
-    <div>
+    <div className="w-full max-w-xs m-auto" >
 
     {error && <Alert message={error}/> }
-    <form onSubmit={handleSubmit}>
-        <label htmlFor="email" >EMAIL</label>
-        <input 
-            type="email"
-            name="email"
-            placeholder="youremail@gmail.com"
-            onChange={handleChange}
-        />
+    <form className="bg--white shadow-md rouded px-8 py-6 pb-8 mb-4" onSubmit={handleSubmit}>
 
-        <label htmlFor="password">PASSWORD</label>
-        <input
-            type="password" 
-            name="password"
-            placeholder="******" 
-            id="password"
-            onChange={handleChange}
-         />
+        <div className="mb-4">
+             <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2" >EMAIL</label>
+            <input 
+                className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-thigh focus:outline-none focus:shadow-outline"
+                type="email"
+                name="email"
+                placeholder="youremail@gmail.com"
+                onChange={handleChange}
+            />
+        </div>
 
-        <button>Login</button>
-    </form>
+        <div className="mb-4">
+            <label htmlFor="password">PASSWORD</label>
+            <input
+            className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-thigh focus:outline-none focus:shadow-outline"
+                type="password" 
+                name="password"
+                placeholder="******" 
+                id="password"
+                onChange={handleChange}
+            />
+        </div>
+        <div className="items-center justify-between" >
+             <div><button className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button></div>
+             <div><a href="#!" 
+                    className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" 
+                    onClick={handleResetPassword}
+                    >
+                    ¿Olvidaste tu contraseña?
+                    </a>
+              </div> 
+        </div>
+       </form>
 
-    <button onClick={handleGoogleSignin} >Iniciar con Google</button>
+    <p className="my-4 text-sm flex justify-between px-3" >¿No tienes una cuenta? <Link to='/Register'>Register</Link> </p>
+    <button onClick={handleGoogleSignin} className="bg-slate-50 hover:bg-slate-200 text-black shadow-md rounded border-2 border-gray-300 py-2 px-4 w-full " >Iniciar con Google</button>
     </div>
   );
 }
