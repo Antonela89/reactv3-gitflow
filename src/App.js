@@ -1,5 +1,5 @@
 import './App.css';
-import Login from './componentes/Login.jsx'
+import Sesion from './componentes/Sesion.jsx'
 import Api from './componentes/Api.jsx'
 import Api2 from './componentes/Api2.jsx'
 import Api3 from './componentes/Api3.jsx'
@@ -13,7 +13,7 @@ function App() {
     <div className="App">
 
       <BrowserRouter>
-        <Login/> 
+        <Sesion/> 
       </BrowserRouter>
 
       

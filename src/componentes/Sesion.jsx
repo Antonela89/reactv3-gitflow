@@ -1,5 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import { Home } from './Home';
+import { Inicio } from './Login';
 import { Register } from './Register';
 import { AuthProvider } from '../context/authContext';
 
@@ -13,7 +14,7 @@ const Login = () => {
                <AuthProvider>
                     <Routes>
                         <Route path='/' element={<Home/>} />
-                        <Route path='/login' element={<Login/>} />
+                        <Route path='/login' element={<Inicio/>} />
                         <Route path='/register' element={<Register/>} />
                     </Routes>    
                </AuthProvider>

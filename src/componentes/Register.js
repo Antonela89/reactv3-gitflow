@@ -26,8 +26,13 @@ export function Register() {
         if (error.code === "auth/invalid-email") {
             setError("El correo es invalido");
         }
-       
-
+        if (error.code === "auth/email-already-in-use") {
+            setError("El correo ya esta registrado");
+        }
+        if (error.code === "auth/weak-password") {
+            setError("La contraseña es debil, debe contener al menos 6 caracteres");
+        }
+        
     }
 }
 
