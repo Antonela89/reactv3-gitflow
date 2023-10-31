@@ -24,7 +24,7 @@ export function Register() {
     catch (error) {
         console.log(error.code);
         if (error.code === "auth/invalid-email") {
-            setError("Correo Invalido");
+            setError("El correo es invalido");
         }
        
 
