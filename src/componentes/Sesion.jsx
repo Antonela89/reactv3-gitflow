@@ -3,6 +3,7 @@ import { Home } from './Home';
 import { Inicio } from './Login';
 import { Register } from './Register';
 import { AuthProvider } from '../context/authContext';
+import { ProtectedRoute } from './ProtectedRoute';
 
 
 const Login = () => {
@@ -13,7 +14,11 @@ const Login = () => {
            <div className='bg-slate-300 h-screen text-black flex'>
                <AuthProvider>
                     <Routes>
-                        <Route path='/' element={<Home/>} />
+                        <Route path="/" element={
+                            <ProtectedRoute>
+                            <Home/>
+                            </ProtectedRoute>
+                        } />
                         <Route path='/login' element={<Inicio/>} />
                         <Route path='/register' element={<Register/>} />
                     </Routes>    
