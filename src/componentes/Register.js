@@ -48,9 +48,8 @@ export function Register() {
         <input
             type="password" 
             name="password"
-            placeholder="password" 
+            placeholder="******" 
             id="password"
-            placeholder="******"
             onChange={handleChange}
          />
 
