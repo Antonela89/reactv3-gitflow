@@ -4,14 +4,15 @@ import { Inicio } from './Login';
 import { Register } from './Register';
 import { AuthProvider } from '../context/authContext';
 import { ProtectedRoute } from './ProtectedRoute';
+import { Guest } from './Guest';
+import { About } from './About';
+import { Version } from './Version';
 
 
 const Login = () => {
     return (
         <div>
-            <h1>Login</h1>
-            <h1 className="text-3xl font-bold underline">reacTV</h1>
-           <div className='bg-slate-300 h-screen text-black flex'>
+            <div className='bg-slate-300 h-screen text-black flex'>
                <AuthProvider>
                     <Routes>
                         <Route path="/" element={
@@ -19,8 +20,12 @@ const Login = () => {
                             <Home/>
                             </ProtectedRoute>
                         } />
+                        
                         <Route path='/login' element={<Inicio/>} />
                         <Route path='/register' element={<Register/>} />
+                        <Route path='/Guest' element={<Guest/>} />
+                        <Route path='/About' element={<About/>} />
+                        <Route path='/Version' element={<Version/>} />
                     </Routes>    
                </AuthProvider>
            
