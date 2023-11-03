@@ -12,15 +12,15 @@ import { Version } from './Version';
 const Login = () => {
     return (
         <div>
-            <div className='bg-slate-300 h-screen text-black flex'>
+            <div /*className='bg-slate-300 h-screen text-black'*/>
                <AuthProvider>
                     <Routes>
                         <Route path="/" element={
                             <ProtectedRoute>
-                            <Home/>
+                            <Guest/>
                             </ProtectedRoute>
                         } />
-                        
+                        <Route path='/Home' element={<Home/>} />
                         <Route path='/login' element={<Inicio/>} />
                         <Route path='/register' element={<Register/>} />
                         <Route path='/Guest' element={<Guest/>} />
