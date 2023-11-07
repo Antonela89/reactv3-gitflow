@@ -15,8 +15,6 @@ function App() {
       <BrowserRouter>
         <Login/> 
       </BrowserRouter>
-
-      
       
     </div>
   );
