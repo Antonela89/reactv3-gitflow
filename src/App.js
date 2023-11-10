@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import Tmdb from "./hugo/opcion1/data/Tmdb";
 import Loader from "./hugo/opcion1/components/loader/Loader";
+import MovieList from "./hugo/opcion1/components/movielist/MovieList";
 // import Login from "./componentes/Login.jsx";
 // import Api from "./componentes/Api.jsx";
 // import Api2 from "./componentes/Api2.jsx";
@@ -57,7 +58,7 @@ function App() {
           <div className="page">
             <section className="lists">
               {movieList.map((item, key) => (
-                <div key={key}>{item.title}</div>
+                <MovieList key={key} title={item.title} items={item.items} />
               ))}
             </section>
           </div>
