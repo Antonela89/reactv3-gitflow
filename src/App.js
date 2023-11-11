@@ -91,6 +91,17 @@ function App() {
                 <MovieList key={key} title={item.title} items={item.items} />
               ))}
             </section>
+            <footer>
+              Realizado con{" "}
+              <span role="img" aria-label="Corazón">
+                💓
+              </span>{" "}
+              por el grupo Nº 1<br />
+              del curso de React dictado por Codo a Codo
+              <br />
+              Datos extraidos del sitio Themoviedb.org
+              <br />
+            </footer>
           </div>
         )}
       </div>
