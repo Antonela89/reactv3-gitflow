@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Tmdb from "./hugo/opcion1/data/Tmdb";
 import Loader from "./hugo/opcion1/components/loader/Loader";
 import MovieList from "./hugo/opcion1/components/movielist/MovieList";
+import HeroMovie from "./hugo/opcion1/components/heromovie/HeroMovie";
 // import Login from "./componentes/Login.jsx";
 // import Api from "./componentes/Api.jsx";
 // import Api2 from "./componentes/Api2.jsx";
@@ -15,6 +16,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [movieList, setMovieList] = useState([]);
+  const [heroMovieData, setHeroMovieData] = useState(null);
 
   useEffect(() => {
     // Defino la función asincrónica loadAll para cargar los datos
@@ -23,6 +25,16 @@ function App() {
         // Intento obtener la lista de la API utilizando el método getHomeList de Tmdb
         let list = await Tmdb.getHomeList();
         setMovieList(list);
+
+        // Busco aleatoriamente un item de una lista especificada
+        let filteredMovies = list.filter((item) => item.slug === "originals");
+        // Elijo aleatoriamente una película de la lista filtrada
+        let randomChosen = Math.floor(
+          Math.random() * filteredMovies[0].items.results.length
+        );
+        let chosen = filteredMovies[0].items.results[randomChosen];
+        let chosenInfo = await Tmdb.getMovieInfo(chosen.id, "tv");
+        setHeroMovieData(chosenInfo);
       } catch (error) {
         // En caso de error durante la carga de datos, registro el error en la consola
         console.error("Error loading data:", error);
@@ -56,6 +68,7 @@ function App() {
         ) : (
           // Muestro el contenido de la aplicación una vez que los datos se han cargado
           <div className="page">
+            {heroMovieData && <HeroMovie item={heroMovieData} />}
             <section className="lists">
               {movieList.map((item, key) => (
                 <MovieList key={key} title={item.title} items={item.items} />
