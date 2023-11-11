@@ -4,6 +4,7 @@ import Tmdb from "./hugo/opcion1/data/Tmdb";
 import Loader from "./hugo/opcion1/components/loader/Loader";
 import MovieList from "./hugo/opcion1/components/movielist/MovieList";
 import HeroMovie from "./hugo/opcion1/components/heromovie/HeroMovie";
+import Header from "./hugo/opcion1/components/header/Header";
 // import Login from "./componentes/Login.jsx";
 // import Api from "./componentes/Api.jsx";
 // import Api2 from "./componentes/Api2.jsx";
@@ -13,11 +14,13 @@ import HeroMovie from "./hugo/opcion1/components/heromovie/HeroMovie";
 // import { BrowserRouter } from 'react-router-dom';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [movieList, setMovieList] = useState([]);
-  const [heroMovieData, setHeroMovieData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); //Para el control del loader
+  const [error, setError] = useState(null); //Para mostrar o no el mensaje en pantalla
+  const [movieList, setMovieList] = useState([]); //Para guardar el listado de peliculas
+  const [heroMovieData, setHeroMovieData] = useState(null); //Para saber si muestro o no el hero, dependiendo si tengo o no data
+  const [blackHeader, setBlackHeader] = useState(false); //Para poner o no el fondo oscuro en el header
 
+  //Manejo la carga inicial de las listas
   useEffect(() => {
     // Defino la función asincrónica loadAll para cargar los datos
     const loadAll = async () => {
@@ -52,6 +55,19 @@ function App() {
     loadAll();
   }, []);
 
+  //Monitoreo el scroll de la pagina
+  useEffect(() => {
+    const scrollListener = () => {
+      window.scrollY > 10 ? setBlackHeader(true) : setBlackHeader(false);
+    };
+
+    window.addEventListener("scroll", scrollListener);
+    //Elimino el evento cuando salgo de la página
+    return () => {
+      window.removeEventListener("scroll", scrollListener);
+    };
+  }, []);
+
   return (
     <div className="App">
       {/* Lo comento para probar el componente MovieCatalog */}
@@ -68,6 +84,7 @@ function App() {
         ) : (
           // Muestro el contenido de la aplicación una vez que los datos se han cargado
           <div className="page">
+            <Header black={blackHeader} />
             {heroMovieData && <HeroMovie item={heroMovieData} />}
             <section className="lists">
               {movieList.map((item, key) => (
