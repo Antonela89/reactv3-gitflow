@@ -65,3 +65,10 @@ body {
 .movieList:hover .movieList--Arrow-Right {
   opacity: 1;
 }
+
+@media (max-width: 768px) {
+  .movieList--Arrow-Left,
+  .movieList--Arrow-Right {
+    opacity: 1;
+  }
+}
