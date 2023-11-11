@@ -1,0 +1,17 @@
+/* CustomButton.css */
+
+.custom-button {
+  display: inline-block;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 10px;
+  padding: 12px 25px;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 1;
+  transition: opacity ease 0.2s;
+}
+
+.custom-button:hover {
+  opacity: 0.7;
+}

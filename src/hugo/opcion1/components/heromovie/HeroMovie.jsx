@@ -1,6 +1,7 @@
 import React from "react";
 import "./HeroMovie.css";
 import { truncateText } from "../../utils/utils";
+import MyButton from "../mybutton/MyButton";
 
 export default function HeroMovie({ item }) {
   console.log(item);
@@ -36,12 +37,18 @@ export default function HeroMovie({ item }) {
               {truncateText(item.overview, 30)}
             </div>
             <div className="hero--buttons">
-              <a href={`/watch/${item.id}`} className="hero--btn-watch">
-                ▶ Ver
-              </a>
-              <a href={`/list/add/${item.id}`} className="hero--btn-mylist">
-                + Mi lista
-              </a>
+              <MyButton
+                link={`/watch/${item.id}`}
+                text="▶ Ver"
+                backgroundColor="#fff"
+                color="#000"
+              />
+              <MyButton
+                link={`/list/add/${item.id}`}
+                text="+ Mi lista"
+                backgroundColor="#333"
+                color="#fff"
+              />
             </div>
             <div className="hero--genres">
               <strong>Géneros: </strong>
