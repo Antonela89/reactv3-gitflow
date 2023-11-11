@@ -18,7 +18,7 @@ body {
 }
 
 .movieList--list {
-  width: 1300vw;
+  transition: margin-left ease 0.5s;
 }
 
 .movieList--item {
@@ -35,4 +35,33 @@ body {
 
 .movieList--item img:hover {
   transform: scale(1);
+}
+
+.movieList--Arrow-Left,
+.movieList--Arrow-Right {
+  position: absolute;
+  width: 40px;
+  height: 225px;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity ease 0.5s;
+}
+
+.movieList--Arrow-Left {
+  left: 0;
+}
+
+.movieList--Arrow-Right {
+  right: 0;
+}
+
+.movieList:hover .movieList--Arrow-Left,
+.movieList:hover .movieList--Arrow-Right {
+  opacity: 1;
 }
