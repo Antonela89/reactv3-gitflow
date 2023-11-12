@@ -10,6 +10,10 @@ import "./MovieList.css";
  * @returns {JSX.Element} Elemento JSX que representa la lista de películas.
  */
 const MovieList = ({ title, items }) => {
+  /**************************************/
+  /********** Arrow and Clicks **********/
+  /**************************************/
+
   // Estado local para el desplazamiento horizontal de la lista.
   const [scrollX, setScrollX] = useState(0);
 
@@ -38,9 +42,49 @@ const MovieList = ({ title, items }) => {
     setScrollX(x);
   };
 
+  /***************************/
+  /********** Touch **********/
+  /***************************/
+  const [touchStartX, setTouchStartX] = useState(0);
+
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    const touchMoveX = e.touches[0].clientX;
+    const deltaX = touchMoveX - touchStartX;
+
+    // Desplazo hacia la izquierda en una cantidad equivalente al gesto táctil.
+    // Ajusto el desplazamiento a 0 si se excede el límite izquierdo.
+    if (deltaX > 0) {
+      let x = scrollX + Math.round(deltaX);
+      if (x > 0) {
+        x = 0;
+      }
+      setScrollX(x);
+    }
+    // Desplazo hacia la derecha en una cantidad equivalente al gesto táctil.
+    // Limito el desplazamiento para que no se vaya más allá del final de la lista.
+    else {
+      let x = scrollX - Math.round(Math.abs(deltaX));
+      const listW = items.results.length * 150;
+      if (window.innerWidth - listW > x) {
+        x = window.innerWidth - listW - 80;
+      }
+      setScrollX(x);
+    }
+
+    setTouchStartX(touchMoveX);
+  };
+
   // Renderizo la lista de películas.
   return (
-    <div className="movieList">
+    <div
+      className="movieList"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+    >
       <h2>{title}</h2>
       {/* Flecha izquierda para desplazarse hacia la izquierda */}
       <div className="movieList--Arrow-Left" onClick={handleLeftArrow}>
