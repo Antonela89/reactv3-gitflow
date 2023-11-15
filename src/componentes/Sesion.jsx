@@ -7,17 +7,18 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { Guest } from './Guest';
 import { About } from './About';
 import { Version } from './Version';
+import { Perfil } from './Perfil';
 
 
 const Login = () => {
     return (
         <div>
-            <div /*className='bg-slate-300 h-screen text-black'*/>
+            <div>
                <AuthProvider>
                     <Routes>
                         <Route path="/" element={
                             <ProtectedRoute>
-                            <Guest/>
+                            <Home/>
                             </ProtectedRoute>
                         } />
                         <Route path='/Home' element={<Home/>} />
@@ -26,6 +27,7 @@ const Login = () => {
                         <Route path='/Guest' element={<Guest/>} />
                         <Route path='/About' element={<About/>} />
                         <Route path='/Version' element={<Version/>} />
+                        <Route path='/Perfil' element={<Perfil/>} />
                     </Routes>    
                </AuthProvider>
            
